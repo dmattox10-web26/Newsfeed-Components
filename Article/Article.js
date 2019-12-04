@@ -85,6 +85,13 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Redux vs Unstated',
+    date: 'Dec 4, 2019',
+    firstParagraph: `Lars binks lobot mara skywalker dooku. Wicket skywalker kit chewbacca padmé dooku. Organa ahsoka yavin darth dooku moff sidious cade organa. Solo boba dagobah darth. Organa droid wookiee maul boba antilles. Kit lando bothan kashyyyk. Mandalorians wookiee hutt kenobi moff mon jango. C-3p0 darth calamari c-3p0. C-3po tatooine moff antilles qui-gonn. Thrawn coruscant twi'lek windu dantooine moff obi-wan. Sidious palpatine darth palpatine ackbar sith darth obi-wan droid. Thrawn mandalorians fisto calrissian darth luke dooku mon.`,
+    secondParagraph: `Coruscant boba mara binks leia antilles maul organa hutt. Skywalker ben c-3p0 solo jango han tatooine kessel. Maul qui-gonn c-3p0 calrissian. Zabrak skywalker calamari hutt. Solo antilles tatooine coruscant. Maul darth solo moff secura hutt moff dooku. Hutt darth organa dagobah. Coruscant bothan jinn wicket solo kessel bespin. Tatooine jawa mon jade dooku skywalker thrawn ventress hutt. Jinn tusken raider cade fett fett. Hutt dantooine yavin dantooine mandalorians luke maul kenobi. Padmé dantooine amidala grievous kamino binks secura darth yavin.`,
+    thirdParagraph: `Bespin sidious kashyyyk aayla fisto. Hutt obi-wan organa calrissian obi-wan antilles binks. Wicket grievous amidala c-3po kenobi solo k-3po. Tatooine organa anakin binks fett coruscant secura wicket kenobi. Organa leia ahsoka ackbar solo vader. Palpatine endor skywalker qui-gonn naboo mon yoda coruscant. Solo jango tusken raider organa. Hutt antilles skywalker luuke c-3p0 darth leia. Wicket dooku moff obi-wan dantooine jango tatooine kenobi solo. Amidala solo darth hutt maul ben hutt. Calamari hutt darth padmé darth bespin amidala sith jango.`
   }
 ];
 
@@ -112,3 +119,44 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const container = document.querySelector('.articles')
+
+createArticle = (article) => {
+  const outer = document.createElement('div')
+  outer.classList.add('article')
+  const heading = document.createElement('h2')
+  heading.textContent = article.title
+  outer.appendChild(heading)
+  const p1 = document.createElement('p')
+  p1.classList.add('date')
+  p1.textContent = article.date
+  outer.appendChild(p1)
+  const p2 = document.createElement('p')
+  p2.textContent = article.firstParagraph
+  outer.appendChild(p2)
+  const p3 = document.createElement('p')
+  p3.textContent = article.secondParagraph
+  outer.appendChild(p3)
+  const p4 = document.createElement('p')
+  p4.textContent = article.thirdParagraph
+  outer.appendChild(p4)
+  const expand = document.createElement('span')
+  expand.classList.add('expandButton')
+  expand.textContent = 'Expand'
+  expand.addEventListener('click', e=> {
+    if (outer.classList.contains('article-open')) {
+      outer.classList.remove('article-open')
+    }
+    else {
+      outer.classList.add('article-open')
+    }
+  })
+  outer.appendChild(expand)
+  return outer
+}
+
+data.map(article => {
+  const articleElement = createArticle(article)
+  container.appendChild(articleElement)
+})
